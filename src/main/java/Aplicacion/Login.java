@@ -131,7 +131,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        if (loginUsuarios.loggiarse(txtCorreoElectronico.getText(), txt_contrasenna.getText()))
+        if (loginUsuarios.loggiarse(txtCorreoElectronico2.getText(), txt_contrasenna2.getText()))
         {  entrarAlPrograma.idUsuario.setText(String.valueOf(loginUsuarios.getId()));
             entrarAlPrograma.txt_Usuario.setText(loginUsuarios.getNombrePersona());
             entrarAlPrograma.txtApellido.setText(loginUsuarios.getApellido1());

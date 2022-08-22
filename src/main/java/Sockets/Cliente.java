@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import Aplicacion.FormCliente;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class  Cliente extends Thread
 {
     private FormCliente formCliente;
@@ -78,10 +80,18 @@ public void cliente1()
        entrada = new DataInputStream(sc.getInputStream());
        
        while(!msn.equals("Exit")){
+           
+           try {
+               Thread.sleep(100);
+           } catch (InterruptedException ex) {
+               Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
            mensajeInforme="Escriba un msn para enviar";
            formCliente.lbMensaje.setText(mensajeInforme);
            
-           salida.writeUTF(nombrecliente+" :->"+msn);//enviamos mensaje
+           salida.writeUTF(msn);//enviamos mensaje
+           msn="";
            mensajeRecibido = entrada.readUTF();//Leemos respuesta
            listaMensajes.add(formCliente.indice,mensajeRecibido);
            
