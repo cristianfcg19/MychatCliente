@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class FormCliente extends javax.swing.JFrame {
     
    public int indice=0;
-    Cliente cliente=new Cliente("Juan",8000,FormCliente.this);
+    SendDataClient threadClienteEnvio=new SendDataClient("Juan",8000,FormCliente.this);
+    ReceiveDataClient threadClienteReceive= new ReceiveDataClient("Juan",8000, FormCliente.this);
     ArrayList listaMensaje=new ArrayList(); 
     String Acumulador;        
     /**
@@ -20,7 +21,8 @@ public class FormCliente extends javax.swing.JFrame {
      */
     public FormCliente() {
         initComponents();
-        cliente.start();
+        //threadClienteEnvio.start();
+        threadClienteReceive.start();
     }
 
     /**
@@ -32,12 +34,12 @@ public class FormCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        msg = new javax.swing.JTextField();
+        jTextFieldEnviarMensaje = new javax.swing.JTextField();
         lbMensaje = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        JButtonEnviarChat = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaChatDisplay = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
@@ -53,65 +55,60 @@ public class FormCliente extends javax.swing.JFrame {
 
         lbMensaje.setText("Mensaje");
 
-        jButton1.setText("Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JButtonEnviarChat.setText("Enviar");
+        JButtonEnviarChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JButtonEnviarChatActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Cliente");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaChatDisplay.setColumns(20);
+        jTextAreaChatDisplay.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaChatDisplay);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(161, 161, 161)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JButtonEnviarChat, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(233, 233, 233)
-                                .addComponent(lbMensaje))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(100, Short.MAX_VALUE))))
+                        .addGap(114, 114, 114)
+                        .addComponent(lbMensaje))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldEnviarMensaje)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbMensaje)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbMensaje)
-                        .addGap(165, 165, 165)
-                        .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jTextFieldEnviarMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JButtonEnviarChat)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cliente.setMsn(msg.getText());
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void JButtonEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonEnviarChatActionPerformed
+        threadClienteReceive.setMensajeEnviar(jTextFieldEnviarMensaje.getText());
+        jTextFieldEnviarMensaje.setText("");
+          
+    }//GEN-LAST:event_JButtonEnviarChatActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         
@@ -157,11 +154,11 @@ public class FormCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton JButtonEnviarChat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextArea jTextAreaChatDisplay;
+    public javax.swing.JTextField jTextFieldEnviarMensaje;
     public javax.swing.JLabel lbMensaje;
-    public javax.swing.JTextField msg;
     // End of variables declaration//GEN-END:variables
 }
