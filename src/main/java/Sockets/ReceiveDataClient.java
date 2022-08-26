@@ -50,12 +50,19 @@ public void run() {
   recibeDatos();
       
 }
-private void  agregarDatosAChatDisplay(String mensaje){
+private void  agregarDatosAChatDisplayReceived(String mensaje){
     System.out.println("entra a agregar DATOS CHAT!!!");
     System.out.println("el mensaje a agregarDatos chat es +"+mensaje+"+");
     formCliente.jTextAreaChatDisplay.setText(formCliente.jTextAreaChatDisplay.getText()+"remote-> :"+mensaje+"\n");
     mensajeRecibido="";
 }
+
+    private void  agregarDatosAChatDisplaySend(String mensaje){
+    System.out.println("entra a agregar DATOS CHAT!!!");
+    System.out.println("el mensaje a agregarDatos chat es +"+mensaje+"+");
+    formCliente.jTextAreaChatDisplay.setText(formCliente.jTextAreaChatDisplay.getText()+"local-> :"+mensaje+"\n");
+    mensajeEnviar="";
+    }
 
 
 public void recibeDatos(){
@@ -73,7 +80,7 @@ public void recibeDatos(){
         }
         
         do{
-            String index= "";
+            
             System.out.println("mensaje recibido en inicio while +"+mensajeRecibido+"+" );
         
             /*
@@ -107,10 +114,25 @@ public void recibeDatos(){
             System.out.println("+++++++++++++++++++++++++"
                     + "\n+++++++++++++++++++++++++\n+++++++++++++++++++++++++\n+++++++++++++++++++++++++" );
             ultimoMsjrecibidoGuardado=mensajeRecibido;
-            agregarDatosAChatDisplay(mensajeRecibido);
+            agregarDatosAChatDisplayReceived(mensajeRecibido);
             mensajeRecibido="";   
         }
-            System.out.println("mensaje recibido de cliente despues del if +"+mensajeRecibido+"+" );
+            //System.out.println("mensaje recibido de cliente despues del if +"+mensajeRecibido+"+" );
+        
+            
+            //en este bloque se envia informacion
+            System.out.println("mensaje a enviar " + mensajeEnviar);
+ 
+        if(!mensajeEnviar.equals("")){
+            try {            
+                salida.writeUTF(mensajeEnviar);
+            } catch (IOException ex) {
+                Logger.getLogger(ReceiveDataClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            agregarDatosAChatDisplaySend(mensajeEnviar);
+            mensajeEnviar="";
+        }
+        
        
         }while(!mensajeRecibido.equals("Exit")||socketReceive.isConnected());
         
