@@ -10,7 +10,7 @@ import Objects.LoginUsuarios;
  */
 public class Login extends javax.swing.JFrame {
       LoginUsuarios loginUsuarios=new LoginUsuarios();
-      EntrarAlPrograma entrarAlPrograma=new EntrarAlPrograma();
+     
       /**
      * Creates new form Login
      */
@@ -30,7 +30,6 @@ public class Login extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txt_contrasenna = new javax.swing.JTextField();
-        txtCorreoElectronico = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -38,6 +37,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txt_correoElectronico = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,9 +46,9 @@ public class Login extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         jLabel7.setText("Login");
 
-        txtCorreoElectronico.addActionListener(new java.awt.event.ActionListener() {
+        txt_contrasenna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoElectronicoActionPerformed(evt);
+                txt_contrasennaActionPerformed(evt);
             }
         });
 
@@ -102,6 +102,12 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txt_correoElectronico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_correoElectronicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -116,10 +122,10 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9)
-                                    .addComponent(txt_contrasenna, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txt_contrasenna, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
@@ -136,9 +142,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txt_correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(txt_contrasenna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,15 +178,25 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        if (loginUsuarios.loggiarse(txtCorreoElectronico2.getText(), txt_contrasenna2.getText()))
-        {  entrarAlPrograma.idUsuario.setText(String.valueOf(loginUsuarios.getId()));
+        if (loginUsuarios.loggiarse(txt_correoElectronico.getText(), txt_contrasenna.getText()))
+        {  EntrarAlPrograma entrarAlPrograma=new EntrarAlPrograma();
+            entrarAlPrograma.idUsuario.setText(String.valueOf(loginUsuarios.getId()));
             entrarAlPrograma.txt_Usuario.setText(loginUsuarios.getNombrePersona());
             entrarAlPrograma.txtApellido.setText(loginUsuarios.getApellido1());
             entrarAlPrograma.rol.setText(loginUsuarios.getTipoRol());
+             
             entrarAlPrograma.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txt_contrasennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_contrasennaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_contrasennaActionPerformed
+
+    private void txt_correoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_correoElectronicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_correoElectronicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,7 +243,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JTextField txtCorreoElectronico;
     public javax.swing.JTextField txt_contrasenna;
+    public javax.swing.JTextField txt_correoElectronico;
     // End of variables declaration//GEN-END:variables
 }

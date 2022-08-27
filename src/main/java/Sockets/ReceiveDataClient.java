@@ -81,7 +81,7 @@ public void recibeDatos(){
         
         do{
             
-            System.out.println("mensaje recibido en inicio while +"+mensajeRecibido+"+" );
+            //System.out.println("mensaje recibido en inicio while +"+mensajeRecibido+"+" );
         
             /*
         try {
@@ -93,7 +93,7 @@ public void recibeDatos(){
             
             //en este bloque se lee el mensaje Recibido
         try {
-            System.out.println("mensaje recibido en el try catch inicio+"+mensajeRecibido+"+" );
+            //System.out.println("mensaje recibido en el try catch inicio+"+mensajeRecibido+"+" );
             mensajeRecibido = entrada.readUTF();//Leemos respuesta
             
             if (mensajeRecibido.equals(ultimoMsjrecibidoGuardado)){
@@ -101,7 +101,7 @@ public void recibeDatos(){
                 ultimoMsjrecibidoGuardado = "esperemos nunca tener que llegar aca";
             }
             
-            System.out.println("mensaje recibido en el try catch final+"+mensajeRecibido+"+" );
+            //System.out.println("mensaje recibido en el try catch final+"+mensajeRecibido+"+" );
             
         } catch (IOException ex) {
             Logger.getLogger(ReceiveDataClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +109,7 @@ public void recibeDatos(){
         
         
         //en este bloque se agrega el mensaje recibido al chat
-            System.out.println("mensaje recibido de cliente +"+mensajeRecibido+"+" );
+            //System.out.println("mensaje recibido de cliente +"+mensajeRecibido+"+" );
         if (!mensajeRecibido.equals("")){
             System.out.println("+++++++++++++++++++++++++"
                     + "\n+++++++++++++++++++++++++\n+++++++++++++++++++++++++\n+++++++++++++++++++++++++" );
@@ -121,11 +121,14 @@ public void recibeDatos(){
         
             
             //en este bloque se envia informacion
-            System.out.println("mensaje a enviar " + mensajeEnviar);
- 
+            //System.out.println("mensaje a enviar " + mensajeEnviar);
+            System.out.println("mensaje a enviar justo antes del if+" + mensajeEnviar+"+");
+            
         if(!mensajeEnviar.equals("")){
-            try {            
+            try {
+                System.out.println("mensaje a enviar justo justo antes de enviar el el file+" + mensajeEnviar+"+");
                 salida.writeUTF(mensajeEnviar);
+                System.out.println("mensaje a enviar justo justo despues de enviar el el file+" + mensajeEnviar+"+");
             } catch (IOException ex) {
                 Logger.getLogger(ReceiveDataClient.class.getName()).log(Level.SEVERE, null, ex);
             }
